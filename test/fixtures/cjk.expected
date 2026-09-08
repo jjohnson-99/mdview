@@ -1,0 +1,5 @@
+line      (0,0)-(0,0) p90   MdviewH1Bg         ""
+replace   (0,0)-(0,2) p100  MdviewH1           "◈ "
+replace   (2,0)-(2,2) p100  MdviewBullet       "● "
+replace   (3,0)-(3,2) p100  MdviewBullet       "● "
+replace   (5,0)-(5,2) p100  MdviewQuote        "▎ "

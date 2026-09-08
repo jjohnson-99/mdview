@@ -1,0 +1,6 @@
+replace   (0,0)-(0,2) p100  MdviewQuote        "▎ "
+replace   (1,0)-(1,2) p100  MdviewQuote        "▎ "
+replace   (3,0)-(3,2) p100  MdviewQuote        "▎ "
+replace   (4,0)-(4,2) p100  MdviewQuote        "▎ "
+replace   (4,2)-(4,4) p100  MdviewQuote        "▎ "
+replace   (5,0)-(5,2) p100  MdviewQuote        "▎ "
