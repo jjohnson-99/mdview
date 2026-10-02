@@ -70,8 +70,7 @@ treesitter highlighting on for markdown. See |mdview-inline|.
 Any plugin manager, or an ordinary 'runtimepath' entry. With lazy.nvim: >lua
 
     {
-        "mdview",
-        dir = "~/plugins/mdview",
+        "jjohnson-99/mdview",
         ft = "markdown",
         -- Options are read by plugin/mdview.vim as it is sourced, so they
         -- have to be set before the plugin loads: init, not config.
@@ -91,6 +90,11 @@ time to compute the highlight groups. Set those in `init`. See
 if you set one late anyway.
 
 Run `:helptags ALL` after installing to build this file's tags.
+
+To work on a local checkout, swap the repository for its path: >lua
+
+    { "mdview", dir = "~/plugins/mdview", ft = "markdown" }
+<
 
                                                             *g:loaded_mdview*
 Setting `g:loaded_mdview` before startup stops the plugin loading at all: >vim

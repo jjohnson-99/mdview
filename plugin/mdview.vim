@@ -8,7 +8,7 @@
 if exists('g:loaded_mdview')
     finish
 endif
-let g:loaded_mdview = 0
+let g:loaded_mdview = 1
 
 
 "=================================================

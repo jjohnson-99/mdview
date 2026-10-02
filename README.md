@@ -25,8 +25,7 @@ With [lazy.nvim](https://github.com/folke/lazy.nvim):
 
 ```lua
 {
-    "mdview",
-    dir = "~/plugins/mdview",
+    "jjohnson-99/mdview",
     ft = "markdown",
     -- Options are read by plugin/mdview.vim as it is sourced, so they have to
     -- be set before the plugin loads: init, not config.
@@ -47,6 +46,16 @@ nothing until your next colorscheme change. See [Options](#options) for which
 options are which.
 
 Run `:helptags ALL` after installing to build the help tags.
+
+To work on a local checkout instead, swap the repository for its path:
+
+```lua
+{
+    "mdview",
+    dir = "~/plugins/mdview",
+    ft = "markdown",
+}
+```
 
 ### Usage
 
