@@ -119,14 +119,17 @@ While a buffer is rendered:
     |:MdviewDisable|                 Everything mdview drew is removed and the
                                     window options it took are handed back.
 
-mdview sets two window-local options in every window showing a rendered
+mdview sets these window-local options in every window showing a rendered
 buffer, and restores them when the buffer stops being rendered or the window
 stops showing it:
 
     'conceallevel'      set to 2   -- without it nothing is concealed
     'concealcursor'     set to ""  -- this is what reveals the cursor's line
+    'wrap'              set on     -- unless |g:mdview_Wrap| is 0
+    'linebreak'         set on     -- unless |g:mdview_Wrap| is 0
+    'breakindent'       set on     -- unless |g:mdview_Wrap| is 0
 
-Both are restored to what they were, and only if mdview still holds them: an
+Each is restored to what it was, and only if mdview still holds it: an
 option you or another plugin has since changed is left alone. Toggling on and
 off leaves the window as it was found.
 
@@ -150,9 +153,9 @@ buffer.
 
                                                              *:MdviewDisable*
 :MdviewDisable      Stop rendering the current buffer: clears every extmark,
-                    unbinds the buffer's autocmds, and hands back
-                    'conceallevel' and 'concealcursor' in every window that
-                    no longer shows a rendered buffer.
+                    unbinds the buffer's autocmds, and hands back the
+                    window options it took (|mdview-usage|) in every
+                    window that no longer shows a rendered buffer.
 
 ==============================================================================
 6. WHAT GETS RENDERED                                       *mdview-rendering*
@@ -218,6 +221,16 @@ The filetypes |g:mdview_AutoEnable| acts on. >vim
 mdview reads the `markdown` treesitter tree whatever the buffer's 'filetype'
 is, so adding a filetype here only works for one that markdown's grammar can
 parse.
+
+                                                              *g:mdview_Wrap*
+Soft-wrap long lines while a buffer is rendered: mdview sets 'wrap',
+'linebreak' and 'breakindent' alongside its conceal options and hands them
+back the same way. Set to 0 to leave all three as you have them. >vim
+
+    let g:mdview_Wrap = 1
+<
+Read once, when mdview first renders a buffer in the session. A change after
+that needs a restart.
 
 ------------------------------------------------------------------------------
 7.2 Glyphs                                             *mdview-options-glyphs*
@@ -397,6 +410,8 @@ an edit, a scroll, or a resize. To apply one on the spot: >vim
 |g:mdview_AutoEnable| and |g:mdview_Filetypes| are read on |FileType|, so they
 affect the next buffer opened rather than the current one.
 
+|g:mdview_Wrap| is read once per session, at the first render.
+
 ==============================================================================
 8. HIGHLIGHT GROUPS                                        *mdview-highlights*
 
@@ -567,6 +582,11 @@ An unclosed fenced block renders nothing until its closing fence exists.
 Rendering follows the buffer, not the window. `b:mdview` is buffer-scoped,
 so |:MdviewDisable| in one window stops rendering everywhere the buffer is
 shown.
+
+A wrapped line's continuation rows carry no decoration. A quote's bar and a
+list item's bullet are drawn on the line's first screen row only;
+'breakindent' lines the continuation up with the line's indent, not with the
+text after the marker.
 
 Soft-wrap reflow is out of scope. mdview does not lay text out; it replaces
 markers in place. Concealed text still counts toward where Neovim wraps a

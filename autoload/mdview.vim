@@ -41,7 +41,11 @@ let s:MAX_VIEWPORT = 4
 " conceal the cursor line in any mode; s:view.Place() suppressing the same ops
 " is the other half of that, and the two must agree or the raw text and its
 " replacement both draw.
+" g:mdview_Wrap is read once, here: s:saved records are keyed by these names.
 let s:OWNED = {'conceallevel': 2, 'concealcursor': ''}
+if g:mdview_Wrap
+    call extend(s:OWNED, {'wrap': v:true, 'linebreak': v:true, 'breakindent': v:true})
+endif
 
 " Op kinds that hide or shift the text they sit on, and so are dropped on the
 " cursor's own row: the line has to read as it was written to be edited. `hl`,

@@ -21,6 +21,11 @@ if !exists('g:mdview_Filetypes')
     let g:mdview_Filetypes = ['markdown']
 endif
 
+" soft-wrap long lines at word boundaries, continuation rows indented to match
+if !exists('g:mdview_Wrap')
+    let g:mdview_Wrap = 1
+endif
+
 " icon drawn in place of the `#` markers, one per heading level
 if !exists('g:mdview_HeadingIcons')
     let g:mdview_HeadingIcons = ['◈ ', '◆ ', '▸ ', '▹ ', '· ', '· ']

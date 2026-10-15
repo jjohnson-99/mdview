@@ -68,9 +68,10 @@ buffer whose filetype is not in `g:mdview_Filetypes`, use one of:
 | `:MdviewEnable`  | Render it. Works with `g:mdview_AutoEnable` off.          |
 | `:MdviewDisable` | Stop, clear every extmark, hand the window options back.  |
 
-While a buffer is rendered mdview holds two window-local options -- it sets
-`conceallevel` to `2` and `concealcursor` to empty -- in every window showing
-that buffer, and gives them back when the buffer stops being rendered or the
+While a buffer is rendered mdview holds a few window-local options -- it sets
+`conceallevel` to `2` and `concealcursor` to empty, and turns on `wrap`,
+`linebreak` and `breakindent` unless `g:mdview_Wrap` is 0 -- in every window
+showing that buffer, and gives them back when the buffer stops being rendered or the
 window stops showing it. An option you have changed in the meantime is left
 alone. Toggling on and off leaves the window as it was found.
 
@@ -85,6 +86,10 @@ and link destinations come back on the cursor row as well.
 " :MdviewEnable works regardless of this (default: 1)
 let g:mdview_AutoEnable = 1
 let g:mdview_Filetypes  = ['markdown']
+
+" Soft-wrap while rendered: wrap, linebreak, breakindent. Read once per session
+" (default: 1)
+let g:mdview_Wrap = 1
 
 " Glyphs. Each carries its own trailing space, because the marker it replaces
 " is concealed along with the space that followed it.
@@ -210,6 +215,10 @@ as well, where one at top level does not.
 rule is sized against the raw line, which does not account for the quote bar
 mdview inserts on the same row. A `---` at top level, or indented in a list
 item, is correct.
+
+**A wrapped line's continuation rows carry no decoration.** A quote's bar and
+a list item's bullet are drawn on the first screen row only; `breakindent`
+lines the rest up with the line's indent, not with the text after the marker.
 
 **A document that hides more of itself than it shows draws its bottom rows
 raw.** Hiding a line makes room for another at the bottom, so mdview re-reads
